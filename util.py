@@ -8,16 +8,17 @@ import subprocess
 
 def run_and_get_result(param, print_param = True):
     if print_param:
-        print(param)
+        print("\033[0;32m %s \033[0m" % param)
     ret = subprocess.check_output(param)
     # return int(re.sub("[a-z]", '', strTime))
     s = ret.decode('utf-8')
     return s
 
 def fillSSD():
-    cmd = ["sh", "Jobs/Fill.sh"]
-    ret = run_and_get_result(cmd)
-    print(ret)
+    # cmd = ["sh", "Jobs/Fill.sh"]
+    # ret = run_and_get_result(cmd)
+    # print(ret)
+    os.system("sh Jobs/Fill.sh")
 
 
 
@@ -27,7 +28,14 @@ def fork_and_run(param, print_param = True):
         return pid
 
     ret = run_and_get_result(param, print_param)
-    print(ret)
+    print("\033[0;32m %s \033[0m" % ret)
+    exit(0)
+
+
+def run_direct(cmd, print_param = True):
+
+    print("\033[0;32m %s \033[0m" % cmd)
+    os.system(cmd)
     exit(0)
 
 
@@ -38,14 +46,15 @@ def collectBlkTrace(dev, dataDir, jobName, runTime, waitTime = 300):
 
 
     time.sleep(waitTime)
-    print("Launch blktrace, time: %s" % (time.time()))
+    print("\033[0;33m Launch blktrace, time: %s \033[0m" % (time.time()))
 
 
     startTime = time.time()
     targetDir = os.path.join(dataDir, "%s-blktrace-%s" % (jobName, startTime))
 
     ret = run_and_get_result(["blktrace", "-d", dev, "-o", targetDir, "-w", str(runTime)])
-    print(ret)
+    print("\033[0;33m Blktrace complete \033[0m")
+    # print(ret)
     exit(0)
 
 
@@ -83,7 +92,7 @@ def collectGCLog(dev, dataDir, jobName, runTime, waitTime = 300):
         return pid
 
     time.sleep(waitTime)
-    print("Starting GC Log collection, time: %s" % (time.time()))
+    print("\033[0;34m Starting GC Log collection, time: %s \033[0m" % (time.time()))
 
     startTime = time.time()
     targetFile = os.path.join(dataDir, "%s-GCLog-%s" % (jobName, startTime))
@@ -96,4 +105,5 @@ def collectGCLog(dev, dataDir, jobName, runTime, waitTime = 300):
 
             f.flush()
 
+    print("\033[0;34m GC collection complete \033[0m")
     exit(0)

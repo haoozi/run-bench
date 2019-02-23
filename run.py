@@ -44,13 +44,16 @@ print(jobs)
 
 
 for eachJob in jobs:
-    print("Job config:")
+    print("\033[0;31m Job config:\033[0m")
     print(eachJob)
     time.sleep(1)
-    print("Start filling SSD, start time %s" % (time.time()))
+    print("\n\033[0;31m Start filling SSD, start time %s\033[0m\n" % (time.time()))
     util.fillSSD()
+    print("\033[0;31m SSD Filling complete\033[0m\n")
 
-    print("Start %s, script %s" % (eachJob["name"], eachJob["script"]))
+
+
+    print("\033[0;31m Start %s, script %s\033[0m\n" % (eachJob["name"], eachJob["script"]))
 
     waitTime = eachJob["wait_time_before_collect"]
     runTime = eachJob["runtime"] if eachJob["runtime"] != "timebased" else 99999
@@ -62,29 +65,23 @@ for eachJob in jobs:
 
 
 
-    ret = util.run_and_get_result(["sh", eachJob["script"]])
-    print("Job %s complete" % (eachJob["name"]))
+    # ret = util.run_and_get_result(["sh", eachJob["script"]])
+
+    util.run_direct("sh %s" % eachJob["script"])
+    print("\033[0;31m Job %s complete \033[0m\n" % (eachJob["name"]))
 
 
 
-    try:
-        os.waitpid(-1, os.WNOHANG)
-        os.kill(pid_gc, signal.SIGINT)
-    except:
-        print("GC State Collection finished")
-    else:
-        print("GC State Collection is running, kill...")
+    os.kill(pid_gc, signal.SIGINT)
 
+    os.kill(pid_blktrace, signal.SIGINT)
 
+    time.sleep(1)
 
     try:
         os.waitpid(-1, os.WNOHANG)
-        os.kill(pid_blktrace, signal.SIGINT)
     except:
-        print("Blktrace finished")
-    else:
-        print("Blktrace is running, kill...")
+        pass
 
-    time.sleep(10)
 
-print("All done")
+print("\033[0;31m All done \033[0m")
