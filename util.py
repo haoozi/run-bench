@@ -3,6 +3,7 @@
 import os
 import time
 import os.path
+import subprocess
 
 
 def run_and_get_result(param, print_param = True):
@@ -88,9 +89,11 @@ def collectGCLog(dev, dataDir, jobName, runTime, waitTime = 300):
     targetFile = os.path.join(dataDir, "%s-GCLog-%s" % (jobName, startTime))
 
     with open(targetFile, 'w') as f:
-        while time.time() < startTime + runTime:
+        while time.time() < startTime + float(runTime):
             acquire_time = time.time()
             record = _getGCLog()
             f.write("%s, %s, %s, %s, %s, %s\n" % (acquire_time - startTime, *record))
+
+            f.flush()
 
     exit(0)
