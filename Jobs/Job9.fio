@@ -14,7 +14,7 @@ disable_clat = 1
 disable_slat = 1
 log_unix_epoch=1
 write_lat_log=hlog
-filename=/dev/nvme0n1
+filename=/dev/pblk
 ; -- end job file --
 
 ; -- Part II --
@@ -32,6 +32,6 @@ disable_clat = 1
 disable_slat = 1
 log_unix_epoch=1
 write_lat_log=hlog
-filename=/dev/nvme0n1
+filename=/dev/pblk
 ; -- end job file --
 

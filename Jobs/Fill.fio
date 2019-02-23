@@ -6,5 +6,5 @@ iodepth=64
 rw=write
 bs=256k
 numjobs=1
-filename=/dev/nvme0n1
+filename=/dev/pblk
 ; -- end job file --
