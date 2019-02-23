@@ -1,0 +1,19 @@
+
+; -- start job file --
+[seq_writers]
+ioengine=libaio
+direct=1
+iodepth=64
+rw=write
+bssplit=4k-256k:20,4k-256k:80
+numjobs=4
+runtime=10800
+log_offset=1
+ramp_time= 300
+disable_clat = 1
+disable_slat = 1
+log_unix_epoch=1
+write_lat_log=hlog
+filename=/dev/nvme0n1
+; -- end job file --
+
