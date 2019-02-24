@@ -53,6 +53,12 @@ for eachJob in jobs:
 
 
 
+
+    print("\033[0;31m Waiting for GC complete\033[0m\n")
+    util.waitGCComplete()
+    print("\033[0;31m GC completed, continue...\033[0m\n")
+
+
     print("\033[0;31m Start %s, script %s\033[0m\n" % (eachJob["name"], eachJob["script"]))
 
     waitTime = eachJob["wait_time_before_collect"]

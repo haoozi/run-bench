@@ -86,6 +86,17 @@ def _getGCLog():
 
     return ret
 
+
+def waitGCComplete():
+    while True:
+        time.sleep(0.3)
+        g = _getGCLog()
+        gc_active = g[1]
+
+        if gc_active == 0:
+            return
+
+
 def collectGCLog(dev, dataDir, jobName, runTime, waitTime = 300):
     pid = os.fork()
     if pid != 0:
@@ -101,7 +112,7 @@ def collectGCLog(dev, dataDir, jobName, runTime, waitTime = 300):
         while time.time() < startTime + float(runTime):
             acquire_time = time.time()
             record = _getGCLog()
-            f.write("%s, %s, %s, %s, %s, %s\n" % (acquire_time - startTime, *record))
+            f.write("%f, %s, %s, %s, %s, %s\n" % (acquire_time - startTime, *record))
 
             f.flush()
             time.sleep(0.001)
