@@ -104,6 +104,7 @@ def collectGCLog(dev, dataDir, jobName, runTime, waitTime = 300):
             f.write("%s, %s, %s, %s, %s, %s\n" % (acquire_time - startTime, *record))
 
             f.flush()
+            time.sleep(0.001)
 
     print("\033[0;34m GC collection complete \033[0m")
     exit(0)
