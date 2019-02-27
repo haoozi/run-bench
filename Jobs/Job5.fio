@@ -5,7 +5,7 @@ ioengine=libaio
 direct=1
 iodepth=64
 rw=randwrite
-bsrange=4k
+bs=4k
 numjobs=1
 runtime=10800
 log_offset=1
@@ -16,4 +16,3 @@ log_unix_epoch=1
 write_lat_log=hlog
 filename=/dev/pblk
 ; -- end job file --
-

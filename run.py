@@ -64,11 +64,16 @@ for eachJob in jobs:
     waitTime = eachJob["wait_time_before_collect"]
     runTime = eachJob["runtime"] if eachJob["runtime"] != "timebased" else 99999
 
+    #
+    # pid_gc = util.collectGCLog(dev, dataDir, eachJob["name"], runTime - waitTime, waitTime)
+    #
+    # pid_blktrace = util.collectBlkTrace(dev, dataDir, eachJob["name"], runTime - waitTime, waitTime)
 
-    pid_gc = util.collectGCLog(dev, dataDir, eachJob["name"], runTime, waitTime)
 
-    pid_blktrace = util.collectBlkTrace(dev, dataDir, eachJob["name"], runTime, waitTime)
 
+    pid_gc = util.collectGCLog(dev, dataDir, eachJob["name"], runTime, 0)
+
+    pid_blktrace = util.collectBlkTrace(dev, dataDir, eachJob["name"], runTime, 0)
 
 
     # ret = util.run_and_get_result(["sh", eachJob["script"]])
@@ -78,11 +83,11 @@ for eachJob in jobs:
 
 
 
-    os.kill(pid_gc, signal.SIGINT)
+    os.kill(pid_gc, signal.SIGTERM)
 
-    os.kill(pid_blktrace, signal.SIGINT)
+    os.kill(pid_blktrace, signal.SIGTERM)
 
-    time.sleep(1)
+    time.sleep(10)
 
     try:
         os.waitpid(-1, os.WNOHANG)

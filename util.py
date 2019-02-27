@@ -36,7 +36,6 @@ def run_direct(cmd, print_param = True):
 
     print("\033[0;32m %s \033[0m" % cmd)
     os.system(cmd)
-    exit(0)
 
 
 def collectBlkTrace(dev, dataDir, jobName, runTime, waitTime = 300):
@@ -94,6 +93,7 @@ def waitGCComplete():
         gc_active = g[1]
 
         if gc_active == 0:
+            time.sleep(5)
             return
 
 
@@ -103,6 +103,7 @@ def collectGCLog(dev, dataDir, jobName, runTime, waitTime = 300):
         return pid
 
     time.sleep(waitTime)
+
     print("\033[0;34m Starting GC Log collection, time: %s \033[0m" % (time.time()))
 
     startTime = time.time()

@@ -1,0 +1,19 @@
+2,3
+5
+fio: failed parsing bsrange=4k
+
+7
+fio-2.16
+Starting 4 processes
+fio: io_u error on file /dev/pblk: Invalid argument: read offset=0, buflen=20
+fio: io_u error on file /dev/pblk: Invalid argument: write offset=0, buflen=80
+fio: io_u error on file /dev/pblk: Invalid argument: write offset=80, buflen=80
+fio: io_u error on file /dev/pblk: Invalid argument: read offset=4096, buflen=20
+fio: io_u error on file /dev/pblk: Invalid argument: read offset=4116, buflen=20
+fio: io_u error on file /dev/pblk: Invalid argument: read offset=4096, buflen=20
+fio: io_u error on file /dev/pblk: Invalid argument: write offset=0, buflen=80
+fio: pid=15314, err=22/file:io_u.c:1712, func=io_u error, error=Invalid argument
+fio: pid=15313, err=22/file:io_u.c:1712, func=io_u error, error=Invalid argument
+fio: pid=15315, err=22/file:io_u.c:1712, func=io_u error, error=Invalid argument
+fio: io_u error on file /dev/pblk: Invalid argument: read offset=20, buflen=4096
+fio: pid=15316, err=22/file:io_u.c:1712, func=io_u error, error=Invalid argument
