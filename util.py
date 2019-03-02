@@ -1,6 +1,7 @@
 #! /usr/bin/env python3
 
 import os
+import re
 import time
 import os.path
 import subprocess
@@ -57,11 +58,16 @@ def collectBlkTrace(dev, dataDir, jobName, runTime, waitTime = 300):
     exit(0)
 
 
+# u:1023/1024,gc:0/0(0)(stop:<1024,full:>1741,free:16152/16152/16296)-0
+
+p_rate_limiter_user = re.compile('u:[0-9]*/[0-9]*')
+p_rate_limiter_gc = re.compile('gc:[0-9]*/[0-9]*')
 
 def _getGCLog():
     """ret : [gc_enabled, gc_active, user_write, gc_write, write_amp]"""
     gc_state = ""
     write_amp = ""
+    rate_limiter = ""
     ret = []
 
     with open("/sys/block/pblk/pblk/gc_state") as f:
@@ -69,6 +75,9 @@ def _getGCLog():
 
     with open("/sys/block/pblk/pblk/write_amp_mileage") as f:
         write_amp = f.read()
+
+    with open("/sys/block/pblk/pblk/rate_limiter") as f:
+        rate_limiter = f.read()
 
     for e in gc_state.split(","):
         ret.append(int(e.split('=')[1]))
@@ -82,6 +91,9 @@ def _getGCLog():
     ret.append(int(write_amp_dic['user']))
     ret.append(int(write_amp_dic['gc']))
     ret.append(float(write_amp_dic['WA']))
+
+    tmp = p_rate_limiter_user.match(rate_limiter)
+    limiter_u_a, limiter_u_b =
 
     return ret
 
@@ -116,7 +128,7 @@ def collectGCLog(dev, dataDir, jobName, runTime, waitTime = 300):
             f.write("%f, %s, %s, %s, %s, %s\n" % (acquire_time - startTime, *record))
 
             f.flush()
-            time.sleep(0.001)
+            # time.sleep(0.001)
 
     print("\033[0;34m GC collection complete \033[0m")
     exit(0)

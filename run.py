@@ -78,6 +78,8 @@ for eachJob in jobs:
 
     # ret = util.run_and_get_result(["sh", eachJob["script"]])
 
+    time.sleep(5)
+
     util.run_direct("sh %s" % eachJob["script"])
     print("\033[0;31m Job %s complete \033[0m\n" % (eachJob["name"]))
 
