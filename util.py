@@ -92,8 +92,21 @@ def _getGCLog():
     ret.append(int(write_amp_dic['gc']))
     ret.append(float(write_amp_dic['WA']))
 
+
+
     tmp = p_rate_limiter_user.match(rate_limiter)
-    limiter_u_a, limiter_u_b =
+    limiter_u_a, limiter_u_b = tmp.group().split(':')[1].split('/')
+
+    ret.append(int(limiter_u_a))
+    ret.append(int(limiter_u_b))
+
+
+    tmp = p_rate_limiter_gc.match(rate_limiter)
+    limiter_u_a, limiter_u_b = tmp.group().split(':')[1].split('/')
+
+    ret.append(int(limiter_u_a))
+    ret.append(int(limiter_u_b))
+
 
     return ret
 
