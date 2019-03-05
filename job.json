@@ -2,55 +2,55 @@
     {
         "name":"Job1",
         "script":"Jobs/Job1.sh",
-        "wait_time_before_collect":300,
+        "wait_time_before_collect":0,
         "runtime":"10800"
     },
     {
         "name":"Job2",
         "script":"Jobs/Job2.sh",
-        "wait_time_before_collect":300,
+        "wait_time_before_collect":0,
         "runtime":"10800"
     },
     {
         "name":"Job3",
         "script":"Jobs/Job3.sh",
-        "wait_time_before_collect":300,
+        "wait_time_before_collect":0,
         "runtime":"10800"
     },
     {
         "name":"Job4",
         "script":"Jobs/Job4.sh",
-        "wait_time_before_collect":300,
+        "wait_time_before_collect":0,
         "runtime":"10800"
     },
     {
         "name":"Job5",
         "script":"Jobs/Job5.sh",
-        "wait_time_before_collect":300,
+        "wait_time_before_collect":0,
         "runtime":"10800"
     },
     {
         "name":"Job6",
         "script":"Jobs/Job6.sh",
-        "wait_time_before_collect":300,
+        "wait_time_before_collect":0,
         "runtime":"10800"
     },
     {
         "name":"Job7",
         "script":"Jobs/Job7.sh",
-        "wait_time_before_collect":300,
+        "wait_time_before_collect":0,
         "runtime":"10800"
     },
     {
         "name":"Job8",
         "script":"Jobs/Job8.sh",
-        "wait_time_before_collect":300,
+        "wait_time_before_collect":0,
         "runtime":"10800"
     },
     {
         "name":"Job9",
         "script":"Jobs/Job9.sh",
-        "wait_time_before_collect":300,
+        "wait_time_before_collect":0,
         "runtime":"10800"
     }
 ]

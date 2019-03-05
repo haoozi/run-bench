@@ -71,9 +71,9 @@ for eachJob in jobs:
 
 
 
-    pid_gc = util.collectGCLog(dev, dataDir, eachJob["name"], runTime, 0)
+    pid_gc = util.collectGCLog(dev, dataDir, eachJob["name"], runTime - waitTime, 0)
 
-    pid_blktrace = util.collectBlkTrace(dev, dataDir, eachJob["name"], runTime, 0)
+    pid_blktrace = util.collectBlkTrace(dev, dataDir, eachJob["name"], runTime - waitTime, 0)
 
 
     # ret = util.run_and_get_result(["sh", eachJob["script"]])

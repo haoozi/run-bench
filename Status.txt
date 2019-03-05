@@ -17,3 +17,82 @@ fio: pid=15313, err=22/file:io_u.c:1712, func=io_u error, error=Invalid argument
 fio: pid=15315, err=22/file:io_u.c:1712, func=io_u error, error=Invalid argument
 fio: io_u error on file /dev/pblk: Invalid argument: read offset=20, buflen=4096
 fio: pid=15316, err=22/file:io_u.c:1712, func=io_u error, error=Invalid argument
+
+
+Job3
+; -- start job file --
+[seq_writers]
+ioengine=libaio
+direct=1
+iodepth=64
+rw=write
+bssplit=4k-256k:20,4k-256k:80
+numjobs=4
+runtime=10800
+log_offset=1
+ramp_time= 300
+disable_clat = 1
+disable_slat = 1
+log_unix_epoch=1
+write_lat_log=hlog
+filename=/dev/pblk
+; -- end job file --
+
+seq_writers: (g=0): rw=write, bs=20-4K/80-4K/80-4K, ioengine=libaio, iodepth=64
+...
+fio-2.16
+Starting 4 processes
+fio: io_u error on file /dev/pblk: Invalid argument: write offset=4096, buflen=80
+fio: io_u error on file /dev/pblk: Invalid argument: write offset=4176, buflen=80
+fio: io_u error on file /dev/pblk: Invalid argument: write offset=4096, buflen=80
+fio: io_u error on file /dev/pblk: Invalid argument: write offset=4176, buflen=80
+fio: io_u error on file /dev/pblk: Invalid argument: write offset=4096, buflen=80
+fio: io_u error on file /dev/pblk: Invalid argument: write offset=4176, buflen=80
+fio: io_u error on file /dev/pblk: Invalid argument: write offset=0, buflen=80
+fio: io_u error on file /dev/pblk: Invalid argument: write offset=80, buflen=4096
+fio: pid=2592, err=22/file:io_u.c:1712, func=io_u error, error=Invalid argument
+fio: pid=2593, err=22/file:io_u.c:1712, func=io_u error, error=Invalid argument
+fio: pid=2594, err=22/file:io_u.c:1712, func=io_u error, error=Invalid argument
+fio: pid=2591, err=22/file:io_u.c:1712, func=io_u error, error=Invalid argument
+
+
+
+
+
+Job7
+
+
+; -- start job file --
+[seq_writers]
+ioengine=libaio
+direct=1
+iodepth=64
+rw=readwrite
+bssplit=4k-256k:20,4k-256k:80
+numjobs=4
+runtime=10800
+log_offset=1
+ramp_time= 300
+disable_clat = 1
+disable_slat = 1
+log_unix_epoch=1
+write_lat_log=hlog
+filename=/dev/pblk
+; -- end job file --
+
+seq_writers: (g=0): rw=rw, bs=20-4K/80-4K/80-4K, ioengine=libaio, iodepth=64
+...
+fio-2.16
+Starting 4 processes
+fio: io_u error on file /dev/pblk: Invalid argument: read offset=0, buflen=20
+fio: io_u error on file /dev/pblk: Invalid argument: read offset=20, buflen=4096
+fio: io_u error on file /dev/pblk: Invalid argument: read offset=4096, buflen=20
+fio: io_u error on file /dev/pblk: Invalid argument: read offset=4116, buflen=20
+fio: io_u error on file /dev/pblk: Invalid argument: read offset=4096, buflen=20
+fio: io_u error on file /dev/pblk: Invalid argument: write offset=0, buflen=80
+fio: io_u error on file /dev/pblk: Invalid argument: write offset=0, buflen=80
+fio: io_u error on file /dev/pblk: Invalid argument: write offset=80, buflen=80
+fio: pid=2640, err=22/file:io_u.c:1712, func=io_u error, error=Invalid argument
+fio: pid=2638, err=22/file:io_u.c:1712, func=io_u error, error=Invalid argument
+fio: pid=2637, err=22/file:io_u.c:1712, func=io_u error, error=Invalid argument
+fio: pid=2639, err=22/file:io_u.c:1712, func=io_u error, error=Invalid argument

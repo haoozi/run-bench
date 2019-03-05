@@ -94,15 +94,15 @@ def _getGCLog():
 
 
 
-    tmp = p_rate_limiter_user.match(rate_limiter)
-    limiter_u_a, limiter_u_b = tmp.group().split(':')[1].split('/')
+    tmp = p_rate_limiter_user.search(rate_limiter).group()
+    limiter_u_a, limiter_u_b = tmp.split(':')[1].split('/')
 
     ret.append(int(limiter_u_a))
     ret.append(int(limiter_u_b))
 
 
-    tmp = p_rate_limiter_gc.match(rate_limiter)
-    limiter_u_a, limiter_u_b = tmp.group().split(':')[1].split('/')
+    tmp = p_rate_limiter_gc.search(rate_limiter).group()
+    limiter_u_a, limiter_u_b = tmp.split(':')[1].split('/')
 
     ret.append(int(limiter_u_a))
     ret.append(int(limiter_u_b))
@@ -129,6 +129,14 @@ def collectGCLog(dev, dataDir, jobName, runTime, waitTime = 300):
 
     time.sleep(waitTime)
 
+    print("\033[0;34m GC Collection start, waiting for writes \033[0m")
+
+    start_gc_writes = _getGCLog()[2]
+
+    while True:
+        if _getGCLog()[2] != start_gc_writes:
+            break
+
     print("\033[0;34m Starting GC Log collection, time: %s \033[0m" % (time.time()))
 
     startTime = time.time()
@@ -138,7 +146,7 @@ def collectGCLog(dev, dataDir, jobName, runTime, waitTime = 300):
         while time.time() < startTime + float(runTime):
             acquire_time = time.time()
             record = _getGCLog()
-            f.write("%f, %s, %s, %s, %s, %s\n" % (acquire_time - startTime, *record))
+            f.write("%f, %s, %s, %s, %s, %s, %s, %s, %s, %s\n" % (acquire_time - startTime, *record))
 
             f.flush()
             # time.sleep(0.001)
