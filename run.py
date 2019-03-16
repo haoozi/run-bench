@@ -62,7 +62,7 @@ for eachJob in jobs:
     print("\033[0;31m Start %s, script %s\033[0m\n" % (eachJob["name"], eachJob["script"]))
 
     waitTime = eachJob["wait_time_before_collect"]
-    runTime = eachJob["runtime"] if eachJob["runtime"] != "timebased" else 99999
+    runTime = int(eachJob["runtime"]) if eachJob["runtime"] != "timebased" else 99999
 
     #
     # pid_gc = util.collectGCLog(dev, dataDir, eachJob["name"], runTime - waitTime, waitTime)
