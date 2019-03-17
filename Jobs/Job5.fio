@@ -7,6 +7,7 @@ iodepth=64
 rw=randwrite
 bs=4k
 numjobs=1
+rate_iops=250
 runtime=10800
 log_offset=1
 ramp_time= 300

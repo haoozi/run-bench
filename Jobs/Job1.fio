@@ -8,6 +8,7 @@ bs=4k
 numjobs=1
 runtime=10800
 log_offset=1
+rate_iops=250
 ramp_time= 300
 disable_clat = 1
 disable_slat = 1

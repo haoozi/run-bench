@@ -9,6 +9,7 @@ bs=64k
 numjobs=1
 runtime=10800
 log_offset=1
+rate_iops=250
 ramp_time= 300
 disable_clat = 1
 disable_slat = 1
@@ -16,4 +17,3 @@ log_unix_epoch=1
 write_lat_log=hlog
 filename=/dev/pblk
 ; -- end job file --
-

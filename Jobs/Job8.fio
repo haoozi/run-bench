@@ -8,6 +8,7 @@ iodepth=64
 rw=randwrite
 bs=256k
 numjobs=1
+rate_iops=250
 runtime=3600
 ramp_time= 30
 write_lat_log=hlog

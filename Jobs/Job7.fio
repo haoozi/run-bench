@@ -7,6 +7,7 @@ rw=randwrite
 bsrange=4k-256k
 rwmixwrite  = 80
 numjobs=4
+rate_iops=250
 runtime=3600
 ramp_time= 30
 write_lat_log=hlog

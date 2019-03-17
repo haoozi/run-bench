@@ -89,12 +89,11 @@ for eachJob in jobs:
 
     os.kill(pid_blktrace, signal.SIGTERM)
 
-    time.sleep(10)
-
     try:
         os.waitpid(-1, os.WNOHANG)
     except:
         pass
 
+    time.sleep(300)
 
 print("\033[0;31m All done \033[0m")
